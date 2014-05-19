@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+cd vm
+vagrant up
+cd ..
+
+echo
+echo "You can access to node like this:"
+echo "cd vm; vagrant ssh"
+echo
