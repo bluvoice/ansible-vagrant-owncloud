@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+./start-node
+
+ansible-playbook -v --timeout 30 owncloud.yaml
+
+echo
+echo "The ownCloud Web Interface is accessible at http://10.0.10.10/owncloud"
+echo
+echo "For the next access, you can use administrator account (user=admin, password=adminp)"
+echo

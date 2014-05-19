@@ -1,0 +1,3 @@
+- include: playbooks/pre.yaml
+- include: playbooks/own.yaml
+- include: playbooks/mysql.yaml
