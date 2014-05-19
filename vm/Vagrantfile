@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "precise64"
+  
+  # use a faster mirror - better in europe anyway
+  config.vm.provision :shell, :inline => "sed -i 's/us.archive.ubuntu.com/mirror.sov.uk.goscomb.net/g' /etc/apt/sources.list"
+
+  config.vm.define :own do |own_config|
+    own_config.vm.hostname = "own"
+    own_config.vm.network :private_network, ip: "10.0.10.10" # eth1
+    own_config.vm.provider "virtualbox" do |vb|
+      vb.name = "own"
+      vb.customize ["modifyvm", :id, "--memory", 1200]
+      vb.customize ["modifyvm", :id, "--rtcuseutc", "on"]
+      vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
+      vb.customize ["modifyvm", :id, "--nictype2", "virtio"]
+      vb.customize ["modifyvm", :id, "--nictype3", "virtio"]
+    end
+  end
+
+end
