@@ -1,0 +1,26 @@
+---
+#
+# - Install all the prerequisites for ownCloud.
+# - Install the apt repository and install owncloud
+#
+- name: ownCloud
+  hosts: all
+  gather_facts: True
+  sudo: True
+  tasks:
+
+    - name: Add ownCloud sources to apt
+      apt_repository: repo='deb http://download.opensuse.org/repositories/isv:/ownCloud:/community/xUbuntu_12.04/ /' state=present
+
+    - name: Add ownCloud apt key
+      apt_key: url='http://download.opensuse.org/repositories/isv:ownCloud:community/xUbuntu_12.04/Release.key' state=present
+
+    - name: Install ownCloud
+      apt: pkg=owncloud update_cache=yes state=present
+      notify: 
+        - Restart apache2
+    
+  handlers:
+
+    - name: Restart apache2
+      service: name=apache2 state=restarted

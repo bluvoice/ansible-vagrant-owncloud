@@ -1,0 +1,51 @@
+---
+
+#
+# Setup the MySQL db for ownCloud
+#
+
+- name: MySQL db
+  hosts: all
+  gather_facts: True
+  sudo: True
+  tasks:
+
+    - name: Install mysql-server
+      apt: pkg=mysql-server state=present
+
+    - name: Install python-mysqldb
+      apt: pkg=python-mysqldb state=present
+
+    - name: mysql config file that binds to all interfaces
+      copy: src=files/my.cnf dest=/etc/mysql/my.cnf owner=root group=root mode=0644
+      notify: restart mysql
+
+    - name: update mysql root password for all root accounts
+      mysql_user: name=root host={{ item }} password=$root_db_password
+      with_items:
+        - '{{ own }}'
+        - 127.0.0.1
+
+    - name: Create database owncloud
+      mysql_db: name=owncloud state=present
+      
+    - name: Create database user
+      mysql_user: name=ownuser host={{ item }} password=ownpass priv=owncloud.*:ALL,GRANT state=present
+      with_items:
+        - '{{ own }}'
+        - 127.0.0.1
+
+    - name: ensure anonymous users are not in the database
+      mysql_user: name='' host={{ item }} state=absent
+      with_items:
+        - '{{ own }}'
+        - 127.0.0.1
+        - ::1
+
+    - name: copy owncloud autoconfig file to select database mysql
+      copy: src=files/autoconfig.php dest=/var/www/owncloud/config/autoconfig.php owner=www-data group=www-data mode=0644
+    
+  handlers:
+
+    - name: restart mysql
+      service: name=mysql state=restarted

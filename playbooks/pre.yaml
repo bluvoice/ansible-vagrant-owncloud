@@ -1,0 +1,15 @@
+---
+
+- name: prerequisites
+  hosts: all
+  sudo: True
+  gather_facts: False
+
+  tasks:
+
+    - name: update apt cache
+      apt: update_cache=yes
+    
+    - name: install python-pycurl
+      apt: pkg=python-pycurl state=present
+
