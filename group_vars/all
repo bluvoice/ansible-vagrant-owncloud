@@ -1,0 +1,8 @@
+---
+#
+log_debug: True
+log_verbose: True
+
+ansible_ssh_user: vagrant
+
+own: 10.0.10.10
