@@ -1,6 +1,6 @@
-# Owncloud Server 6.0.3
+# Owncloud Server
   
-This repository contains a script that will automatically install Owncloud Server 6.0.3 onto VirtualBox VM using Ansible and Vagrant.
+This repository contains a script that will automatically install Owncloud Server onto VirtualBox VM using Ansible and Vagrant.
 
 ## Install prereqs
 
