@@ -1,8 +1,9 @@
 ---
+
 #
-# - Install all the prerequisites for ownCloud.
 # - Install the apt repository and install owncloud
 #
+
 - name: ownCloud
   hosts: all
   gather_facts: True
