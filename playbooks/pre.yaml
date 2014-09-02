@@ -1,5 +1,9 @@
 ---
 
+#
+# - Install all the prerequisites
+#
+
 - name: prerequisites
   hosts: all
   sudo: True
