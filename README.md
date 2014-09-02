@@ -6,7 +6,7 @@ This repository contains a script that will automatically install Owncloud Serve
 
  * git
  * Ansible (tested with v1.4.1 on Ubuntu 13.04 and v1.4.5 on Ubuntu 12.04)
- * Vagrant (tested with v1.4.1 on Ubuntu 13.04 and on Ubuntu 12.04)
+ * Vagrant (tested with v1.4.1 on Ubuntu 13.04 and v1.6.3 on Ubuntu 12.04)
  * VirtualBox (tested with v4.2.10 on Ubuntu 13.04 and v4.2.18 on Ubuntu 12.04)
 
 ## Get the 64-bit Ubuntu 12.04 (precise) Vagrant box
