@@ -5,4 +5,4 @@ log_verbose: True
 
 ansible_ssh_user: vagrant
 
-own: 10.0.10.10
+own_ip: "{{ ansible_eth1.ipv4.address}}"
