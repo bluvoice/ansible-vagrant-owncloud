@@ -1,1 +1,2 @@
+[owncloudServer]
 own ansible_ssh_host=10.0.10.10
