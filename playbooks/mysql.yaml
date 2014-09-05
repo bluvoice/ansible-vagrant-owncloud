@@ -23,7 +23,7 @@
     - name: update mysql root password for all root accounts
       mysql_user: name=root host={{ item }} password=$root_db_password
       with_items:
-        - '{{ own }}'
+        - '{{ own_ip }}'
         - 127.0.0.1
 
     - name: Create database owncloud
@@ -32,13 +32,13 @@
     - name: Create database user
       mysql_user: name=ownuser host={{ item }} password=ownpass priv=owncloud.*:ALL,GRANT state=present
       with_items:
-        - '{{ own }}'
+        - '{{ own_ip }}'
         - 127.0.0.1
 
     - name: ensure anonymous users are not in the database
       mysql_user: name='' host={{ item }} state=absent
       with_items:
-        - '{{ own }}'
+        - '{{ own_ip }}'
         - 127.0.0.1
         - ::1
 
